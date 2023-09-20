@@ -9,7 +9,6 @@ import com.alexdev.ms.model.Board;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
 	
-	//TODO mess around and find a good ratio
 	private static int WIDTH = 690;
 	private static int HEIGHT = 480;
 	
