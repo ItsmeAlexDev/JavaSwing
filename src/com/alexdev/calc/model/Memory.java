@@ -1,9 +1,8 @@
 package com.alexdev.calc.model;
 
 import static java.lang.Double.parseDouble;
-import static java.lang.Double.toString;
-import static java.lang.Integer.parseInt;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,10 +70,13 @@ public class Memory {
 	}
 	
 	private String operationResult() {
-		if(operation == null) return currentValue;
+		if(operation == null ||
+		   operation == CommandType.EQUALS) return currentValue;
 		
-		double bufferValue = parseDouble(this.bufferValue.replace(",", "."));
-		double currentValue = parseDouble(this.currentValue.replace(",", "."));
+		double bufferValue = this.bufferValue.isEmpty() ?
+				0 : parseDouble(this.bufferValue.replace(",", "."));
+		double currentValue = this.currentValue.isEmpty() ?
+				0 : parseDouble(this.currentValue.replace(",", "."));
 		double total = 0;
 		
 		switch (operation) {
@@ -88,9 +90,12 @@ public class Memory {
 				total = bufferValue * currentValue;
 				break;
 			case DIVISION:
-				total = bufferValue / currentValue;
+				total = currentValue != 0 ? bufferValue / currentValue : 0;
 				break;
 		}
+		
+		total = Double.valueOf(new DecimalFormat("#.00").format(total));
+		
 		String totalString = Double.toString(total);
 		boolean isInteger = totalString.endsWith(".0");
 		return isInteger ? totalString.replace(".0", "") : totalString;

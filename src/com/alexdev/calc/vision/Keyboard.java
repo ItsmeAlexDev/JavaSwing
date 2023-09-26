@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import com.alexdev.calc.model.Memory;
@@ -69,7 +68,7 @@ public class Keyboard extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton button = (JButton) e.getSource();
+		Button button = (Button) e.getSource();
 		Memory.getMemory().doCommand(button.getText());
 	}
 }
