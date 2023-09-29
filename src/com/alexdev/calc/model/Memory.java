@@ -52,14 +52,14 @@ public class Memory {
 			currentValue = takePlace ? value : currentValue + value;
 			takePlace = false;
 		}
-		else if (commandType == CommandType.INVERSE) {
+		else if(commandType == CommandType.INVERSE) {
 			Double currentNumber = parseDouble(getCurrentValue().replace(",", ".")) * -1;
 			if(currentNumber == 0) return;
 			String result = Double.toString(currentNumber);
 			boolean isInteger = result.endsWith(".0");
 			currentValue = isInteger ? result.replace(".0", "") : result;
 		}
-		else {
+		else{
 			takePlace = true;
 			currentValue = operationResult();
 			bufferValue = currentValue;
